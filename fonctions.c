@@ -1,3 +1,4 @@
+
 #include "headers.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -47,7 +48,7 @@ void MenuPrincipal()
   
     //Creation de la fenetre
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    
+    TTF_Init();
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
        printf("Erreur : %s \n", SDL_GetError());
@@ -217,15 +218,24 @@ void MenuPrincipal()
                    }
             break;
             case SDL_MOUSEMOTION:
-               if (356 < event.motion.x<632 && 345 < event.motion.y< 392)
-               {Image_PlayButtonBackground = IMG_Load("/home/mouheb/PROJET/src/Images/ButtonBackground4.png");}
+              
+                if(356 <= event.motion.x && event.motion.x<=632 && 345 <= event.motion.y && event.motion.y <=392)
+               {Image_PlayButtonBackground = IMG_Load("/home/mouheb/PROJET/src/Images/ButtonBackground4.png");
+                SDL_BlitSurface(Image_PlayButtonBackground, NULL, screen, &PositionButtonBackgroundPlaySurEcran);
+                SonBrefClick = Mix_LoadWAV("SonBrefClick.wav");
+                          Mix_PlayChannel(-1, SonBrefClick, 0);
+              
+                 }
+               else {Image_PlayButtonBackground = IMG_Load("/home/mouheb/PROJET/src/Images/ButtonBackground1.png");SDL_BlitSurface(Image_PlayButtonBackground, NULL, screen, &PositionButtonBackgroundPlaySurEcran);
+                
+                  }
                /*if (356 < event.motion.x< 632 && 405 < event.motion.y < 450)
                {Image_OptionsButtonBackground = IMG_Load("/home/mouheb/PROJET/src/Images/xd.jpg");}
                if(356 < event.motion.x< 632 && 465 < event.motion.y < 513)
                {Image_QuitButtonBackground = IMG_Load("/home/mouheb/PROJET/src/Images/xd.jpg");}*/
             break;
             case SDL_MOUSEBUTTONDOWN:
-            if(356 < event.motion.x<632 && 345 < event.motion.y < 392)       //Ouverture du fenetre Pour Jouer le Jeu  
+            if(356 <= event.motion.x && event.motion.x<=632 && 345 <= event.motion.y && event.motion.y <=392)   //Ouverture du fenetre Pour Jouer le Jeu  
                {
                  //Musique(Son Bref)
                  SonBrefClick = Mix_LoadWAV("SonBrefClick.wav");
@@ -249,8 +259,7 @@ void MenuPrincipal()
                
                
                
-               
-               else if(356<=event.button.x<=632 && 405<=event.button.y<=450) //Ouverture du fenetre Pour les Options
+               else if(356<=event.button.x && event.button.x<=632 && 405<=event.button.y && event.button.y<=450) //Ouverture du fenetre Pour les Options
                {
                  while(program_launched = SDL_TRUE)
                    {
@@ -261,8 +270,7 @@ void MenuPrincipal()
                    
                    
                    
-                   
-               else if(356<=event.button.x<=632 && 465<=event.button.y<=513)  //Quitter aprés cliquer sur Bouton Quitter
+                else if(356<=event.button.x && event.button.x<=632 && 465<=event.button.y && event.button.y<=513)   //Quitter aprés cliquer sur Bouton Quitter
                  {
                     program_launched = SDL_FALSE;
                  } 
@@ -291,5 +299,4 @@ void MenuPrincipal()
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
-
 
