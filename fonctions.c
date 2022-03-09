@@ -1,4 +1,6 @@
 #include "headers.h"
+#include "MiniMap.c"
+#include "MiniMapHeaders.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
@@ -47,7 +49,7 @@ void MenuPrincipal()
   SDL_Color CouleurNoire1 = {0, 0, 0};
   SDL_Color CouleurRouge = {255, 0, 0};
   
-  Mix_Music *MusicContenuMenu = NULL;
+  Mix_Music *MusicContenuMenu = NULL; 
   Mix_Chunk *SonBrefClick;
   
   SDL_Event event;
@@ -56,6 +58,8 @@ void MenuPrincipal()
 int FoisDeRepetition = 1; 
 int x;
 int t = 0;
+
+MiniMap m;
 
 //Creation de la fenetre
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -134,7 +138,7 @@ int t = 0;
       SDL_Quit();
     }
 
-Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.jpg");
+Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.png");
     if(Image_PlaySurface == NULL)
     {
       printf("Erreur : %s \n", SDL_GetError());
@@ -222,6 +226,9 @@ Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.jpg");
       SDL_Quit();
     }
     
+    
+
+    
         //Police + Texte
     policeTexte = TTF_OpenFont("paze.ttf", 80);                                            policeTexteOptions = TTF_OpenFont("f.ttf", 80);
     Texte = TTF_RenderText_Blended(policeTexte, "WELCOME", CouleurNoire);                  TexteOptions = TTF_RenderText_Blended(policeTexteOptions, "OPTIONS", CouleurNoire1);
@@ -282,6 +289,7 @@ Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.jpg");
         
         PositionBoutonVolume1SurEcran.x = 760;                PositionBoutonVolume2SurEcran.x = 1070;
         PositionBoutonVolume1SurEcran.y = 365;                PositionBoutonVolume2SurEcran.y = 365;
+        
 
         SDL_BlitSurface(Image_Background, NULL, screen, &PositionBGSurEcran); //Blit du fond
         SDL_BlitSurface(Texte, NULL, screen, &PositionTexteSurEcran); //Blit du texte
@@ -521,11 +529,12 @@ SDL_PollEvent(&event);
                  while(program_launched = SDL_TRUE)
                    {
                      SDL_BlitSurface(Image_PlaySurface, NULL, screen, &PositionBGSurEcran);
+                     afficher(m, screen);
                      
                      SDL_Flip(screen);
                    }
                }
-               
+               Liberer(&m);
                
                
                if(556 <= event.button.x && event.button.x<=826 && 407 <= event.button.y && event.button.y <=451) //Ouverture du fenetre Pour les Options
@@ -605,7 +614,7 @@ SDL_PollEvent(&event);
                                break;
                              case SDLK_RIGHT:
                                  Mix_VolumeMusic(MIX_MAX_VOLUME * 3);
-                                 Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume2.png");
+                                 Volume3 = IMG_Load("/home/mouheb/PROJET/src/Ima		ges/Volume2.png");
                                break;
                                
                           }
@@ -633,6 +642,7 @@ SDL_PollEvent(&event);
                          if(1098 <= event.button.x && event.button.x<=1307 && 832 <= event.button.y && event.button.y <=889)   
                          {
                            t = 0;
+                           printf("%d",t);
                          }
                          
                          //Boutons Volume

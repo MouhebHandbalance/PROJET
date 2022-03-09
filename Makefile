@@ -6,3 +6,7 @@ fonctions.o:fonctions.c
 	gcc -c fonctions.c 
 headers.o:headers.h
 	gcc -c headers.h
+MiniMapHeaders.o:MiniMapHeaders.h
+	gcc -c MiniMapHeaders.h
+MiniMap.o:MiniMap.c
+	gcc -c MiniMap.c
