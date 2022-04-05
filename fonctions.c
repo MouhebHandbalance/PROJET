@@ -6,9 +6,9 @@
 
 void MenuPrincipal()
 {                                  
-                                                                       SDL_Surface *TexteOptions = NULL;
-  SDL_Surface *screen = NULL;                                          SDL_Surface *Volume1 = NULL; 
-  SDL_Surface *Image_Background = NULL;                                SDL_Surface *Volume2 = NULL; 
+                                                                       SDL_Surface *TexteOptions = NULL;                     SDL_Surface *BlackBackGround = NULL;
+  SDL_Surface *screen = NULL;                                          SDL_Surface *Volume1 = NULL;                          SDL_Surface *txt = NULL; 
+  SDL_Surface *Image_Background = NULL;                                SDL_Surface *Volume2 = NULL;                          SDL_Surface *txtnext = NULL;
   SDL_Surface *Image_Lantern1 = NULL;                                  SDL_Surface *Volume3 = NULL; 
   SDL_Surface *Image_Lantern2 = NULL;                                  SDL_Surface *BoutonVolume1 = NULL; 
   SDL_Surface *Image_SbouiJeu = NULL;                                  SDL_Surface *BoutonVolume2 = NULL; 
@@ -33,13 +33,13 @@ void MenuPrincipal()
   SDL_Rect PositionTexteSurEcran;                                      
   SDL_Rect PositionLantern1SurEcran;                                   
   SDL_Rect PositionLantern2SurEcran;                               
-  SDL_Rect PositionSbouiJeuSurEcran;                                   SDL_Rect PositionTexteOptionsSurEcran;
-  SDL_Rect PositionffSurEcran;                                         SDL_Rect PositionTexteVolumeSurEcran;
+  SDL_Rect PositionSbouiJeuSurEcran;                                   SDL_Rect PositionTexteOptionsSurEcran;           SDL_Rect PositiontxtSurEcran;
+  SDL_Rect PositionffSurEcran;                                         SDL_Rect PositionTexteVolumeSurEcran;            SDL_Rect PositiontxtnextSurEcran;
                                                                        SDL_Rect PositionTexteBackSurEcran;
                                                                        SDL_Rect PositionTexteFullScreenSurEcran;
                                                                 
-  TTF_Font *policeTexte = NULL;                                        TTF_Font *policeTexteOptions = NULL; 
-  TTF_Font *policePlayButton = NULL;                                   TTF_Font *policeTexteVolume = NULL; 
+  TTF_Font *policeTexte = NULL;                                        TTF_Font *policeTexteOptions = NULL;             TTF_Font *policetxt = NULL;
+  TTF_Font *policePlayButton = NULL;                                   TTF_Font *policeTexteVolume = NULL;              TTF_Font *policetxtnext = NULL;
   TTF_Font *policeOptionsButton = NULL;                                TTF_Font *policeTexteBack = NULL; 
   TTF_Font *policeQuitButton = NULL;                                   TTF_Font *policeTexteFullScreen = NULL;
   
@@ -57,14 +57,19 @@ void MenuPrincipal()
 
 int FoisDeRepetition = 1; 
 int x;
-int t = 0;
+int t = 0;       int redimensionnement;    char nomJoueur[10];
 
 MiniMap m;
+
+SDL_Rect posJoueur;
+SDL_Surface *Image_fd = NULL;
+
+temps temp;
 
 //Creation de la fenetre
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     TTF_Init();
-    if(SDL_Init(SDL_INIT_VIDEO) != 0)
+    if(SDL_Init(SDL_INIT_VIDEO) != 0) 	
     {
        printf("Erreur : %s \n", SDL_GetError());
        SDL_FreeSurface(Texte);
@@ -226,7 +231,21 @@ Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.png");
       SDL_Quit();
     }
     
+    Image_fd = IMG_Load("/home/mouheb/PROJET/src/Images/SbouiJeu.png");
+    if(Image_fd == NULL)
+    {
+      printf("Erreur : %s \n", SDL_GetError());
+      SDL_FreeSurface(Texte);
+      SDL_Quit();
+    }
     
+    BlackBackGround = IMG_Load("/home/mouheb/PROJET/src/Images/thumb-3d-black-texture-geometric-black-texture-black-abstraction-background-3d-abstraction-black-texture-creative-black-background.jpg");
+    if(BlackBackGround == NULL)
+    {
+      printf("Erreur : %s \n", SDL_GetError());
+      SDL_FreeSurface(Texte);
+      SDL_Quit();
+    }
 
     
         //Police + Texte
@@ -244,20 +263,28 @@ Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.png");
     //Texte: Quit
     policeQuitButton = TTF_OpenFont("paze.ttf",40);
     Quit = TTF_RenderText_Blended(policeQuitButton, "QUIT", CouleurNoire);
+    
+    //Texte: Meilleuir score
+    policetxt = TTF_OpenFont("f.ttf",40);
+    txt = TTF_RenderText_Blended(policetxt, "!BEST SCORE!", CouleurNoire);
+    
+    //Texte: Next
+    policetxtnext = TTF_OpenFont("f.ttf",40);
+    txtnext = TTF_RenderText_Blended(policetxtnext, "NEXT", CouleurNoire);
 
 // Boucle de l'ouverture du fenetre
-     while(program_launched)
+     while(program_launched && t == 0)
      {
      
      
         PositionBGSurEcran.x = 0;                                                                                      
         PositionBGSurEcran.y = 0;                                                                                      
         
-        PositionPlayButtonSurEcran.x = 640;          PositionButtonBackgroundPlaySurEcran.x = 556;
-        PositionPlayButtonSurEcran.y = 350;          PositionButtonBackgroundPlaySurEcran.y = 345;
-        
-        
-        PositionOptionsButtonSurEcran.x = 610;       PositionButtonBackgroundOptionsSurEcran.x = 556;
+        PositionPlayButtonSurEcran.x = 640;          PositionButtonBackgroundPlaySurEcran.x = 556;                  PositiontxtSurEcran.x = 550;
+        PositionPlayButtonSurEcran.y = 350;          PositionButtonBackgroundPlaySurEcran.y = 345;                  PositiontxtSurEcran.y = 400;
+                                                                                                                   
+                                                                                                                    PositiontxtnextSurEcran.x = 640;
+        PositionOptionsButtonSurEcran.x = 610;       PositionButtonBackgroundOptionsSurEcran.x = 556;               PositiontxtnextSurEcran.y = 800;
         PositionOptionsButtonSurEcran.y = 410;       PositionButtonBackgroundOptionsSurEcran.y = 405;
         
         PositionQuitButtonSurEcran.x = 640;          PositionButtonBackgroundQuitSurEcran.x = 556;
@@ -290,6 +317,10 @@ Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.png");
         PositionBoutonVolume1SurEcran.x = 760;                PositionBoutonVolume2SurEcran.x = 1070;
         PositionBoutonVolume1SurEcran.y = 365;                PositionBoutonVolume2SurEcran.y = 365;
         
+        
+        posJoueur.x = 50;
+        posJoueur.y = 500;
+        
 
         SDL_BlitSurface(Image_Background, NULL, screen, &PositionBGSurEcran); //Blit du fond
         SDL_BlitSurface(Texte, NULL, screen, &PositionTexteSurEcran); //Blit du texte
@@ -316,144 +347,11 @@ SDL_PollEvent(&event);
                        break;
                        
                        case SDLK_p:
-                         while(program_launched = SDL_TRUE)
-                         {
-                           SDL_BlitSurface(Image_PlaySurface, NULL, screen, &PositionBGSurEcran);
-                           SDL_BlitSurface(Image_SbouiJeu, NULL, screen, &PositionSbouiJeuSurEcran);
-                           while(program_launched = SDL_TRUE)
-                               {
-                                 //case SDLK_q:
-                                 program_launched = SDL_FALSE;
-                               }
-                           SDL_Flip(screen);
-                         }
+                         t = 2;
                          break;
                          
                          case SDLK_o:
-                            while(program_launched = SDL_TRUE)
-                   {
-                     SDL_BlitSurface(Image_Background, NULL, screen, &PositionBGSurEcran);
-                     SDL_BlitSurface(TexteOptions, NULL, screen, &PositionTexteOptionsSurEcran);
-                     SDL_BlitSurface(TexteVolume, NULL, screen, &PositionTexteVolumeSurEcran);
-                     SDL_BlitSurface(TexteBack, NULL, screen, &PositionTexteBackSurEcran);
-                     SDL_BlitSurface(TexteFullScreen, NULL, screen, &PositionTexteFullScreenSurEcran);
-                     SDL_BlitSurface(Volume3, NULL, screen, &PositionVolume1SurEcran);
-                     SDL_BlitSurface(CarreauFullScreen, NULL, screen, &PositionCarreauFullScreenSurEcran);
-                     SDL_BlitSurface(BoutonVolume1, NULL, screen, &PositionBoutonVolume1SurEcran);
-                     SDL_BlitSurface(BoutonVolume2, NULL, screen, &PositionBoutonVolume2SurEcran);
-                     SDL_PollEvent(&event);
-                     switch(event.type)
-                     {
-                       case SDL_KEYDOWN:
-                          switch(event.key.keysym.sym)
-                          {
-                            case SDLK_f:
-                            CarreauFullScreen = IMG_Load("/home/mouheb/PROJET/src/Images/hello.png");
-                            SDL_BlitSurface(CarreauFullScreen, NULL, screen, & PositionCarreauFullScreenSurEcran);
-                            SDL_WM_ToggleFullScreen(screen);
-                               break;
-                            
-                            case SDLK_b:
-                               SDL_BlitSurface(Image_Background, NULL, screen, &PositionBGSurEcran); //Blit du fond
-                           SDL_BlitSurface(Texte, NULL, screen, &PositionTexteSurEcran); //Blit du texte
-                           SDL_BlitSurface(Image_PlayButtonBackground, NULL, screen, &PositionButtonBackgroundPlaySurEcran);
-                           SDL_BlitSurface(Image_OptionsButtonBackground, NULL, screen, &PositionButtonBackgroundOptionsSurEcran); 
-                           SDL_BlitSurface(Image_QuitButtonBackground, NULL, screen, &PositionButtonBackgroundQuitSurEcran);
-                           SDL_BlitSurface(Play, NULL, screen, &PositionPlayButtonSurEcran);
-                           SDL_BlitSurface(Options, NULL, screen, &PositionOptionsButtonSurEcran);
-                           SDL_BlitSurface(Quit, NULL, screen, &PositionQuitButtonSurEcran);
-                
-                           SDL_BlitSurface(Image_Lantern1, NULL, screen, &PositionLantern1SurEcran);
-
-                           SDL_Flip(screen);
-                            break;
-                            case SDLK_LEFT: 
-                               Mix_VolumeMusic(MIX_MAX_VOLUME / 3);
-                               Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume2.png");
-                               break;
-                            case SDLK_DOWN:
-                              Mix_VolumeMusic(MIX_MAX_VOLUME / 6);
-                              Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume1.png");
-                              break;
-                            case   SDLK_UP:
-                               if(Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume2.png"))
-                               {
-                                 Mix_VolumeMusic(MIX_MAX_VOLUME * 1000);
-                                 Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume3.png");
-                               }
-                               break;
-                             case SDLK_RIGHT:
-                                 Mix_VolumeMusic(MIX_MAX_VOLUME * 3);
-                                 Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume2.png");
-                               break;
-                               
-                          }
-                          
-                          
-                          break;
-                      case SDL_MOUSEMOTION:     //printf("%d | %d \n", event.motion.x, event.motion.y);
-                      break;
-                      
-                      case SDL_MOUSEBUTTONDOWN:
-                      //Bouton FULLSCREEN
-                         if(1250 <= event.button.x && event.button.x<=1295 && 547 <= event.button.y && event.button.y <=588)
-                            {
-                              CarreauFullScreen = IMG_Load("/home/mouheb/PROJET/src/Images/hello.png");
-                              SDL_BlitSurface(CarreauFullScreen, NULL, screen, & PositionCarreauFullScreenSurEcran);
-                              SDL_WM_ToggleFullScreen(screen);
-                            }
-                         else
-                            {
-                              CarreauFullScreen = IMG_Load("/home/mouheb/PROJET/src/Images/hi.png");
-                              SDL_BlitSurface(CarreauFullScreen, NULL, screen, & PositionCarreauFullScreenSurEcran);
-                            }
-                            
-                            //Bouton BACK
-                         if(1098 <= event.button.x && event.button.x<=1307 && 832 <= event.button.y && event.button.y <=889)   
-                         {
-                           SDL_BlitSurface(Image_Background, NULL, screen, &PositionBGSurEcran); //Blit du fond
-                           SDL_BlitSurface(Texte, NULL, screen, &PositionTexteSurEcran); //Blit du texte
-                           SDL_BlitSurface(Image_PlayButtonBackground, NULL, screen, &PositionButtonBackgroundPlaySurEcran);
-                           SDL_BlitSurface(Image_OptionsButtonBackground, NULL, screen, &PositionButtonBackgroundOptionsSurEcran); 
-                           SDL_BlitSurface(Image_QuitButtonBackground, NULL, screen, &PositionButtonBackgroundQuitSurEcran);
-                           SDL_BlitSurface(Play, NULL, screen, &PositionPlayButtonSurEcran);
-                           SDL_BlitSurface(Options, NULL, screen, &PositionOptionsButtonSurEcran);
-                           SDL_BlitSurface(Quit, NULL, screen, &PositionQuitButtonSurEcran);
-                
-                           SDL_BlitSurface(Image_Lantern1, NULL, screen, &PositionLantern1SurEcran);
-
-                           SDL_Flip(screen);
-                         }
-                         
-                         //Boutons Volume
-                         if(762 <= event.button.x && event.button.x<=792 && 365 <= event.button.y && event.button.y <=391 && event.button.button == SDL_BUTTON_LEFT)
-                         {
-                          
-                           Mix_VolumeMusic(MIX_MAX_VOLUME / 3);
-                           Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume2.png");
-                         }
-                         if(762 <= event.button.x && event.button.x<=792 && 365 <= event.button.y && event.button.y <=391 && event.button.button == SDL_BUTTON_RIGHT)
-                         {
-                            Mix_VolumeMusic(MIX_MAX_VOLUME / 6);
-                            Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume1.png");
-                         }
-                         
-                         if(1070 <= event.button.x && event.button.x<=1098 && 365 <= event.button.y && event.button.y <=392 && event.button.button == SDL_BUTTON_LEFT)
-                         {
-                           Mix_VolumeMusic(MIX_MAX_VOLUME * 3);
-                           Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume2.png");
-                         }
-                         
-                         if(1070 <= event.button.x && event.button.x<=1098 && 365 <= event.button.y && event.button.y <=392 && event.button.button == SDL_BUTTON_RIGHT)
-                         {
-                           Mix_VolumeMusic(MIX_MAX_VOLUME * 1000);
-                           Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume3.png");
-                         }
-                    break;
-                    
-                     }
-                     SDL_Flip(screen);
-                   }
+                         t++;
                          break;
                          
                          case SDLK_q:
@@ -523,28 +421,19 @@ SDL_PollEvent(&event);
       case SDL_MOUSEBUTTONDOWN:
             if(556 <= event.button.x && event.button.x<=826 && 345 <= event.button.y && event.button.y <=392)   //Ouverture du fenetre Pour Jouer le Jeu  
                {
-                 //Musique(Son Bref)
-                 SonBrefClick = Mix_LoadWAV("SonBrefClick.wav");
-                 Mix_PlayChannel(-1, SonBrefClick, 0);
-                 while(program_launched = SDL_TRUE)
-                   {
-                     SDL_BlitSurface(Image_PlaySurface, NULL, screen, &PositionBGSurEcran);
-                     afficher(m, screen);
-                     
-                     SDL_Flip(screen);
-                   }
+                 t = 2;
                }
-               Liberer(&m);
+              // Liberer(&m);
                
                
-               if(556 <= event.button.x && event.button.x<=826 && 407 <= event.button.y && event.button.y <=451) //Ouverture du fenetre Pour les Options
+               else if(556 <= event.button.x && event.button.x<=826 && 407 <= event.button.y && event.button.y <=451) //Ouverture du fenetre Pour les Options
                {
-                 t++;
+                 t = 1;
                }
                    
                    
                    
-                if(356<=event.button.x && event.button.x<=632 && 465<=event.button.y && event.button.y<=513)   //Quitter aprés cliquer sur Bouton Quitter
+                else if(356<=event.button.x && event.button.x<=632 && 465<=event.button.y && event.button.y<=513)   //Quitter aprés cliquer sur Bouton Quitter
                  {
                     program_launched = SDL_FALSE;
                  } 
@@ -594,6 +483,7 @@ SDL_PollEvent(&event);
                            SDL_BlitSurface(Quit, NULL, screen, &PositionQuitButtonSurEcran);
                 
                            SDL_BlitSurface(Image_Lantern1, NULL, screen, &PositionLantern1SurEcran);
+                           
 
                            SDL_Flip(screen);
                             break;
@@ -614,7 +504,7 @@ SDL_PollEvent(&event);
                                break;
                              case SDLK_RIGHT:
                                  Mix_VolumeMusic(MIX_MAX_VOLUME * 3);
-                                 Volume3 = IMG_Load("/home/mouheb/PROJET/src/Ima		ges/Volume2.png");
+                                 Volume3 = IMG_Load("/home/mouheb/PROJET/src/Images/Volume2.png");
                                break;
                                
                           }
@@ -641,8 +531,9 @@ SDL_PollEvent(&event);
                             //Bouton BACK
                          if(1098 <= event.button.x && event.button.x<=1307 && 832 <= event.button.y && event.button.y <=889)   
                          {
+                         
                            t = 0;
-                           printf("%d",t);
+                           SDL_Flip(screen);
                          }
                          
                          //Boutons Volume
@@ -675,6 +566,47 @@ SDL_PollEvent(&event);
                      SDL_Flip(screen);
                    }
         }
+        while(t == 2) // interface best score
+        {
+              SDL_BlitSurface(BlackBackGround, NULL, screen, &PositionBGSurEcran);
+              SDL_BlitSurface(txt, NULL, screen, &PositiontxtSurEcran);
+              SDL_BlitSurface(txtnext, NULL, screen, &PositiontxtnextSurEcran);
+              SDL_PollEvent(&event);
+                     switch(event.type)
+                     {
+                       case SDL_KEYDOWN:
+                          switch(event.key.keysym.sym)
+                          {
+                            case SDLK_n:
+                               t = 3;
+                            break;
+                          }
+                      break;    
+                      case SDL_MOUSEBUTTONDOWN:
+                         if(635 <= event.button.x && event.button.x<= 774&& 823 <= event.button.y && event.button.y <=859)
+                         {
+                           t = 3;
+                         }
+                      break;   
+                     }  
+              SDL_Flip(screen);
+        }
+        
+        while(t == 3) //interface lvl1
+        {
+           while(program_launched = SDL_TRUE)
+           {
+             SDL_BlitSurface(Image_PlaySurface, NULL, screen, &PositionBGSurEcran);
+             SDL_BlitSurface(Image_fd, NULL, screen, &posJoueur);
+             MAJMinimap(posJoueur, &m, 100);
+             afficher(m, screen);
+             initialiser_temps(&temp);
+             afficher_temps(&temp, screen);
+             entrerNomJoueur(nomJoueur);
+             SDL_Flip(screen);
+           }
+        }
+        
        
       }     
 
