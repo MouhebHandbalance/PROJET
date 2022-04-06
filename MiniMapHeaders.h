@@ -21,8 +21,7 @@ typedef struct
 {
   SDL_Surface *texte;
   SDL_Rect texteSurEcran;
-  SDL_Surface *policetemps;
-  TTF_Font *policeTexte;
+  TTF_Font *policetemps;
   
   char entree[100];
   time_t t1, t2;

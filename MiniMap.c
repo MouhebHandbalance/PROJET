@@ -47,10 +47,11 @@ void afficher_temps(temps *t, SDL_Surface *screen)
   
   time(&(t->t2));
   t->secondesEcoules = t->t2 - t->t1;
-  t->min = ((t->secondesEcoules /60)%60);
-  t->sec = ((t->secondesEcoules /60)%60);
+  t->sec = ((t->secondesEcoules/60) %60);
+  t->min = ((t->secondesEcoules)%60);
+  
   int millisecondes = SDL_GetTicks()%60;
-  sprintf(t->entree, "%02d:%02d:02d", t->min, t->sec, millisecondes);
+  sprintf(t->entree, "%02d:%02d:%02d", t->min, t->sec, millisecondes);
   t->texte = TTF_RenderText_Blended(t->policetemps, t->entree, CouleurNoire);
   SDL_BlitSurface(t->texte, NULL, screen, &(t->texteSurEcran));
 }
@@ -84,6 +85,12 @@ void sauvegarder(int score, char nomJoueur[], char nomFichier[])
 void meilleur(char nomJoueur[], char nomFichier[], int *score)
 {
   FILE *f = NULL;
+  f = fopen(nomFichier, "a+");
+  printf("Donner le nom du joueur:");
+  scanf("%s", nomJoueur);
+  fprintf(f,"%s", nomJoueur);
+  fprintf(f,"%d", *score);
+  fclose(f);
 }
 /*----------------------------------------------------------*/
 void Liberer(MiniMap * m)
