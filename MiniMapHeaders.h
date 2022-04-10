@@ -29,14 +29,28 @@ typedef struct
   int min, sec;
 }temps;
 
+typedef struct
+{
+  SDL_Surface *score;
+  SDL_Rect scorePos;
+  int val;
+  char entree[100000];
+  
+  TTF_Font *policescore;
+  
+}score;
+
+
 MiniMap initMiniMap(MiniMap m);
 void MAJMinimap(SDL_Rect posJoueur, MiniMap *m,int redimensionnement);
 void afficher(MiniMap m, SDL_Surface *screen);
 void initialiser_temps(temps *t);
 void afficher_temps(temps *t, SDL_Surface *screen);
 void entrerNomJoueur(char nomJoueur[]);
-void sauvegarder(int score, char nomJoueur[], char nomFichier[]);
-void meilleur(char nomJoueur[], char nomFichier[], int *score);
+
+void sauvegarder(int score,char nomjoueur[],char nomfichier[]);
+void meilleur (char nomfichier[],int *score,char nomjoueur[]);
+
 void Liberer(MiniMap *m);
 
 #define SCREEN_W 800

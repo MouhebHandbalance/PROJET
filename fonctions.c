@@ -9,9 +9,9 @@ void MenuPrincipal()
                                                                        SDL_Surface *TexteOptions = NULL;                     SDL_Surface *BlackBackGround = NULL;
   SDL_Surface *screen = NULL;                                          SDL_Surface *Volume1 = NULL;                          SDL_Surface *txt = NULL; 
   SDL_Surface *Image_Background = NULL;                                SDL_Surface *Volume2 = NULL;                          SDL_Surface *txtnext = NULL;
-  SDL_Surface *Image_Lantern1 = NULL;                                  SDL_Surface *Volume3 = NULL;                          SDL_Surface *txtMEILLEUR = NULL;
+  SDL_Surface *Image_Lantern1 = NULL;                                  SDL_Surface *Volume3 = NULL;                          SDL_Surface *MEILLEUR = NULL;
   SDL_Surface *Image_Lantern2 = NULL;                                  SDL_Surface *BoutonVolume1 = NULL; 
-  SDL_Surface *Image_SbouiJeu = NULL;                                  SDL_Surface *BoutonVolume2 = NULL; 
+  SDL_Surface *Image_SbouiJeu = NULL;                                  SDL_Surface *BoutonVolume2 = NULL;                         
   SDL_Surface *Image_xd = NULL;                                        
   SDL_Surface *Image_PlaySurface = NULL;                               
   SDL_Surface *Image_PlayButtonBackground = NULL;                       
@@ -24,7 +24,7 @@ void MenuPrincipal()
   SDL_Surface *Image_ff = NULL;                                        SDL_Surface *CarreauFullScreen1 = NULL;
   
   SDL_Rect PositionPlayButtonSurEcran;                                 SDL_Rect PositionVolume1SurEcran;         SDL_Rect PositionCarreauFullScreenSurEcran;
-  SDL_Rect PositionOptionsButtonSurEcran;                              SDL_Rect PositionVolume2SurEcran;         SDL_Rect PositiontxtMEILLEURSurEcran;
+  SDL_Rect PositionOptionsButtonSurEcran;                              SDL_Rect PositionVolume2SurEcran;         SDL_Rect postxtmeuilleur;
   SDL_Rect PositionQuitButtonSurEcran;                                 SDL_Rect PositionVolume3SurEcran;
   SDL_Rect PositionBGSurEcran;                                         SDL_Rect PositionBoutonVolume1SurEcran;
   SDL_Rect PositionButtonBackgroundPlaySurEcran;                       SDL_Rect PositionBoutonVolume2SurEcran;
@@ -55,9 +55,9 @@ void MenuPrincipal()
   SDL_Event event;
   SDL_Event event1;
 
-int FoisDeRepetition = 1; 
+int FoisDeRepetition = 1;  char MEILLEURS[10000];
 int x;
-int t = 0;       int redimensionnement, score = 0;    char nomJoueur[100] = " ali", meilleurscore[100];
+int t = 0;       int redimensionnement, test, score;    char nomjoueur[100] = "", meilleurscore[100], nomfichier[100]; strcpy(nomfichier, "score");
 
 MiniMap m;
 
@@ -65,6 +65,7 @@ SDL_Rect posJoueur;
 SDL_Surface *Image_fd = NULL;
 
 temps temp;
+
 
 //Creation de la fenetre
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -271,19 +272,12 @@ Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.png");
     //Texte: Next
     policetxtnext = TTF_OpenFont("f.ttf",40);
     txtnext = TTF_RenderText_Blended(policetxtnext, "NEXT", CouleurNoire);
-    
-    //Texte: Meilleur Score
-    FILE *f;
-    char s[100];
-    f=  fopen(meilleurscore,"r");
-    fscanf(f,"%s", s);
-    strcpy(s,nomJoueur);
-    
-    
-    
     policetxtnext = TTF_OpenFont("f.ttf",40);
-    txtMEILLEUR = TTF_RenderText_Blended(policetxtnext, nomJoueur, CouleurNoire);
- 
+    
+     meilleur (nomfichier, &score, nomjoueur);
+     
+        
+        
 // Boucle de l'ouverture du fenetre
      while(program_launched && t == 0)
      {
@@ -305,8 +299,8 @@ Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.png");
         PositionTexteSurEcran.x = 500;
         PositionTexteSurEcran.y = 210;
         
-        PositionLantern1SurEcran.x = -520;           PositionLantern2SurEcran.x = -298;                           PositiontxtMEILLEURSurEcran.x = 600;
-        PositionLantern1SurEcran.y = 0;              PositionLantern1SurEcran.y = 0;                              PositiontxtMEILLEURSurEcran.y = 600;
+        PositionLantern1SurEcran.x = -520;           PositionLantern2SurEcran.x = -298;                         postxtmeuilleur.x =   600;                     
+        PositionLantern1SurEcran.y = 0;              PositionLantern1SurEcran.y = 0;                            postxtmeuilleur.y = 600;
         
         PositionSbouiJeuSurEcran.x = 30;
         PositionSbouiJeuSurEcran.y = 600;
@@ -342,7 +336,7 @@ Image_PlaySurface = IMG_Load("/home/mouheb/PROJET/src/Images/PlaySurface.png");
         SDL_BlitSurface(Play, NULL, screen, &PositionPlayButtonSurEcran);
         SDL_BlitSurface(Options, NULL, screen, &PositionOptionsButtonSurEcran);
         SDL_BlitSurface(Quit, NULL, screen, &PositionQuitButtonSurEcran);
-                
+        
         SDL_BlitSurface(Image_Lantern1, NULL, screen, &PositionLantern1SurEcran);
 
         SDL_Flip(screen);
@@ -580,10 +574,13 @@ SDL_PollEvent(&event);
         }
         while(t == 2) // interface best score
         {
+        
               SDL_BlitSurface(BlackBackGround, NULL, screen, &PositionBGSurEcran);
               SDL_BlitSurface(txt, NULL, screen, &PositiontxtSurEcran);
-              SDL_BlitSurface(txtMEILLEUR, NULL, screen, &PositiontxtMEILLEURSurEcran);
-              SDL_BlitSurface(txtnext, NULL, screen, &PositiontxtnextSurEcran);
+              sprintf(MEILLEURS, "%s -> %d",nomjoueur, score);
+              MEILLEUR = TTF_RenderText_Blended(policetxtnext, MEILLEURS, CouleurNoire);
+              SDL_BlitSurface(MEILLEUR, NULL, screen, &postxtmeuilleur);
+              SDL_BlitSurface(txtnext, NULL, screen, &PositiontxtnextSurEcran);       
               SDL_PollEvent(&event);
                      switch(event.type)
                      {
@@ -593,6 +590,7 @@ SDL_PollEvent(&event);
                             case SDLK_n:
                                t = 3;
                             break;
+                            
                           }
                       break;    
                       case SDL_MOUSEBUTTONDOWN:
@@ -607,8 +605,10 @@ SDL_PollEvent(&event);
         
         if(t == 3)
         {
-          meilleur(nomJoueur,meilleurscore,&score);
-             
+          
+           printf("nom joueur:");
+           scanf("%s", nomjoueur);
+           
           t = 102;
         }
         while(t == 102) //interface lvl1
@@ -622,9 +622,21 @@ SDL_PollEvent(&event);
              afficher(m, screen);
              initialiser_temps(&temp);
              afficher_temps(&temp, screen);
+             SDL_PollEvent(&event);
+                     switch(event.type)
+                     {
+                       case SDL_KEYDOWN:
+                          switch(event.key.keysym.sym)
+                          {
+                            case SDLK_w:
+                               sauvegarder(score,nomjoueur, nomfichier);
+                               break;  
+                          }  
+                    }       
              
              SDL_Flip(screen);
            }
+           
         }
         
        

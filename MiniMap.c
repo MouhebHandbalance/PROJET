@@ -56,40 +56,32 @@ void afficher_temps(temps *t, SDL_Surface *screen)
   SDL_BlitSurface(t->texte, NULL, screen, &(t->texteSurEcran));
 }
 /*----------------------------------------------------------*/
-void entrerNomJoueur(char nomJoueur[])
-{
-  SDL_Event event;
-  
-  SDL_PollEvent(&event);
-  switch(event.type)
-    { 
-      case SDL_KEYDOWN:
-        switch(event.key.keysym.sym)
-       {
-         case SDLK_a:
-            printf("a \n"); 
-       }
-      break;                    
-    }
-}
-/*----------------------------------------------------------*/
-void sauvegarder(int score, char nomJoueur[], char nomFichier[])
+void sauvegarder(int score,char nomjoueur[],char nomfichier[])
 {
   FILE *f = NULL;
-  nomFichier = "Sauvegardage";
-  f = fopen(nomFichier, "w");
-  fprintf(f,"%d %s", score, nomJoueur);
+  f = fopen(nomfichier, "a");
+  fprintf(f, "%s %d \n", nomjoueur, score);
   fclose(f);
 }
 /*----------------------------------------------------------*/
-void meilleur(char nomJoueur[], char nomFichier[], int *score)
+void meilleur (char nomfichier[],int *score,char nomjoueur[])
 {
+  char nomx[10];
+  int max = 0;
   FILE *f = NULL;
-  f = fopen(nomFichier, "a+");
-  printf("Donner le nom du joueur:");
-  scanf("%s", nomJoueur);
-  fprintf(f,"%s", nomJoueur);
-  fprintf(f,"%d", *score);
+
+  f = fopen(nomfichier, "r");
+  while(fscanf(f,"%s %d\n",nomjoueur,score) != EOF)
+  {
+    if(*score > max)
+    {
+      max = *score;
+      strcpy(nomx, nomjoueur);
+    }
+    *score = max;
+    strcpy(nomx, nomjoueur);
+    
+  }
   fclose(f);
 }
 /*----------------------------------------------------------*/
