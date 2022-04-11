@@ -10,3 +10,5 @@ MiniMapHeaders.o:MiniMapHeaders.h
 	gcc -c MiniMapHeaders.h
 MiniMap.o:MiniMap.c
 	gcc -c MiniMap.c
+clavier.o:clavier.c
+	gcc -c clavier.c

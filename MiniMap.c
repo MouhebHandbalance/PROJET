@@ -85,6 +85,7 @@ void meilleur (char nomfichier[],int *score,char nomjoueur[])
   fclose(f);
 }
 /*----------------------------------------------------------*/
+
 void Liberer(MiniMap * m)
 {
   free(m);
