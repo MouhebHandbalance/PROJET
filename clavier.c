@@ -18,7 +18,7 @@ int clavierd(SDL_Surface *screen, char rep[])
 
     strcpy(rep,"");
         
-    image=IMG_Load("/home/mouheb/PROJET/src/Images/thumb-3d-black-texture-geometric-black-texture-black-abstraction-background-3d-abstraction-black-texture-creative-black-background.jpg");
+    image=IMG_Load("/home/mouheb/PROJET/src/Images/1149972.jpg");
     postionimage.x=0;
     postionimage.y=0;
 	delete=IMG_Load("/home/mouheb/PROJET/src/Images/DELETE.png");

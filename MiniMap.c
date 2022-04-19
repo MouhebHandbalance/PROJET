@@ -1,5 +1,19 @@
 #include "MiniMapHeaders.h"
+/**
+* @file MiniMap.c
+* @brief Tache Minimap: AFFICHAGE DU MINIMAP, MANIPULATION DU TEMPS, MANIPULATION DU SCORE ET MEILLEUR SCORE
+* @author Mouheb
+* @version 0.1
+* @date Apr 01, 2022
+*
+*
+*/
 
+/**
+* @brief initialiser le Minimap
+* @param m Le minimap
+* @return Nothing
+*/
 MiniMap initMiniMap(MiniMap m)
 {
   m.ImageMiniature = NULL;
@@ -7,6 +21,13 @@ MiniMap initMiniMap(MiniMap m)
   return m;
 }
 /*----------------------------------------------------------*/
+/**
+* @brief Redimentionner le Minimap
+* @param posJoueur Position du joueur sur minimap
+* @param *m Pointeur sur minimap
+* @param redimentionnement redimentionnement map et personnage
+* @return Nothing
+*/
 void MAJMinimap(SDL_Rect posJoueur, MiniMap *m, int redimensionnement)
 {
   m->PositionPesonnageSurMiniMap.x = posJoueur.x + redimensionnement;
@@ -56,6 +77,7 @@ void afficher_temps(temps *t, SDL_Surface *screen)
   SDL_BlitSurface(t->texte, NULL, screen, &(t->texteSurEcran));
 }
 /*----------------------------------------------------------*/
+
 void sauvegarder(int score,char nomjoueur[],char nomfichier[])
 {
   FILE *f = NULL;
@@ -64,6 +86,7 @@ void sauvegarder(int score,char nomjoueur[],char nomfichier[])
   fclose(f);
 }
 /*----------------------------------------------------------*/
+
 void meilleur (char nomfichier[],int *score,char nomjoueur[])
 {
   char nomx[10];

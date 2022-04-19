@@ -7,7 +7,21 @@
 #include <time.h>
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_mixer.h>
+/**
+* @file MiniMapHeaders.h
+* @brief Les fonctions et strectures necessaires Pur la tache Minimap
+* @author Mouheb
+* @version 0.1
+* @date Apr 01, 2022
+*
+* Testing program for background scrollilng
+*
+*/
 
+/**
+* @struct MiniMap
+* @brief Strecture Minimap(Position sur ecran, espace dans la memoire)
+*/
 typedef struct
 {
   SDL_Surface *ImageMiniature;
