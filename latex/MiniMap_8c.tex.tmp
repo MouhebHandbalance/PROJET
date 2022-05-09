@@ -1,0 +1,206 @@
+\hypertarget{MiniMap_8c}{}\doxysection{Mini\+Map.\+c File Reference}
+\label{MiniMap_8c}\index{MiniMap.c@{MiniMap.c}}
+
+
+Tache Minimap\+: A\+F\+F\+I\+C\+H\+A\+GE DU M\+I\+N\+I\+M\+AP, M\+A\+N\+I\+P\+U\+L\+A\+T\+I\+ON DU T\+E\+M\+PS, M\+A\+N\+I\+P\+U\+L\+A\+T\+I\+ON DU S\+C\+O\+RE ET M\+E\+I\+L\+L\+E\+UR S\+C\+O\+RE.  
+
+
+{\ttfamily \#include \char`\"{}Mini\+Map\+Headers.\+h\char`\"{}}\newline
+Include dependency graph for Mini\+Map.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structMiniMap}{Mini\+Map}} \mbox{\hyperlink{MiniMap_8c_ab8ce38da9c2fd5d642e7e192ad1fe989}{init\+Mini\+Map}} (\mbox{\hyperlink{structMiniMap}{Mini\+Map}} m)
+\begin{DoxyCompactList}\small\item\em initialiser le Minimap \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MiniMap_8c_affa9a098a9f3d1784d4ccf624cedc196}{M\+A\+J\+Minimap}} (S\+D\+L\+\_\+\+Rect pos\+Joueur, \mbox{\hyperlink{structMiniMap}{Mini\+Map}} $\ast$m, int redimensionnement)
+\begin{DoxyCompactList}\small\item\em Redimentionner le Minimap. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MiniMap_8c_a62747d130e5b1ac0198da6c6d6a69f93}{afficher}} (\mbox{\hyperlink{structMiniMap}{Mini\+Map}} m, S\+D\+L\+\_\+\+Surface $\ast$screen)
+\begin{DoxyCompactList}\small\item\em affichager du Minimap sur l\textquotesingle{}ecran \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MiniMap_8c_a76ff495b01c503c70aadd684889dbd24}{initialiser\+\_\+temps}} (\mbox{\hyperlink{structtemps}{temps}} $\ast$t)
+\begin{DoxyCompactList}\small\item\em initialisation du temps \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MiniMap_8c_a34c0a0e12aec6c34b80e005e99415835}{afficher\+\_\+temps}} (\mbox{\hyperlink{structtemps}{temps}} $\ast$t, S\+D\+L\+\_\+\+Surface $\ast$screen)
+\begin{DoxyCompactList}\small\item\em affichage du temps sur l\textquotesingle{}ecran \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MiniMap_8c_a0bfe42309171a25c7b6c76b2b9c0d08d}{sauvegarder}} (int \mbox{\hyperlink{structscore}{score}}, char nomjoueur\mbox{[}$\,$\mbox{]}, char nomfichier\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em sauvegardage du score du Joueur \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MiniMap_8c_a6ec5fb1a45b43978d2438878ad3e6327}{meilleur}} (char nomfichier\mbox{[}$\,$\mbox{]}, int $\ast$\mbox{\hyperlink{structscore}{score}}, char nomjoueur\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Meilleur score. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MiniMap_8c_aa4d0b27b22f7b2a9f9bb40702e37b101}{Liberer}} (\mbox{\hyperlink{structMiniMap}{Mini\+Map}} $\ast$m)
+\begin{DoxyCompactList}\small\item\em Liberation du minimap de la memoire. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Tache Minimap\+: A\+F\+F\+I\+C\+H\+A\+GE DU M\+I\+N\+I\+M\+AP, M\+A\+N\+I\+P\+U\+L\+A\+T\+I\+ON DU T\+E\+M\+PS, M\+A\+N\+I\+P\+U\+L\+A\+T\+I\+ON DU S\+C\+O\+RE ET M\+E\+I\+L\+L\+E\+UR S\+C\+O\+RE. 
+
+\begin{DoxyAuthor}{Author}
+Mouheb 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+Apr 01, 2022 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{MiniMap_8c_a62747d130e5b1ac0198da6c6d6a69f93}\label{MiniMap_8c_a62747d130e5b1ac0198da6c6d6a69f93}} 
+\index{MiniMap.c@{MiniMap.c}!afficher@{afficher}}
+\index{afficher@{afficher}!MiniMap.c@{MiniMap.c}}
+\doxysubsubsection{\texorpdfstring{afficher()}{afficher()}}
+{\footnotesize\ttfamily void afficher (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMiniMap}{Mini\+Map}}}]{m,  }\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{screen }\end{DoxyParamCaption})}
+
+
+
+affichager du Minimap sur l\textquotesingle{}ecran 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & Le minimap a afficher \\
+\hline
+{\em screen} & La fenetre ou le minimap sera afficher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{MiniMap_8c_a34c0a0e12aec6c34b80e005e99415835}\label{MiniMap_8c_a34c0a0e12aec6c34b80e005e99415835}} 
+\index{MiniMap.c@{MiniMap.c}!afficher\_temps@{afficher\_temps}}
+\index{afficher\_temps@{afficher\_temps}!MiniMap.c@{MiniMap.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_temps()}{afficher\_temps()}}
+{\footnotesize\ttfamily void afficher\+\_\+temps (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtemps}{temps}} $\ast$}]{t,  }\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{screen }\end{DoxyParamCaption})}
+
+
+
+affichage du temps sur l\textquotesingle{}ecran 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$t} & pointeur sur temps pour pouvoir calculer le temps ecoulés \\
+\hline
+{\em screen} & La fenetre ou le minimap sera afficher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{MiniMap_8c_a76ff495b01c503c70aadd684889dbd24}\label{MiniMap_8c_a76ff495b01c503c70aadd684889dbd24}} 
+\index{MiniMap.c@{MiniMap.c}!initialiser\_temps@{initialiser\_temps}}
+\index{initialiser\_temps@{initialiser\_temps}!MiniMap.c@{MiniMap.c}}
+\doxysubsubsection{\texorpdfstring{initialiser\_temps()}{initialiser\_temps()}}
+{\footnotesize\ttfamily void initialiser\+\_\+temps (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtemps}{temps}} $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+initialisation du temps 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$t} & pointeur sur temps \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{MiniMap_8c_ab8ce38da9c2fd5d642e7e192ad1fe989}\label{MiniMap_8c_ab8ce38da9c2fd5d642e7e192ad1fe989}} 
+\index{MiniMap.c@{MiniMap.c}!initMiniMap@{initMiniMap}}
+\index{initMiniMap@{initMiniMap}!MiniMap.c@{MiniMap.c}}
+\doxysubsubsection{\texorpdfstring{initMiniMap()}{initMiniMap()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structMiniMap}{Mini\+Map}} init\+Mini\+Map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMiniMap}{Mini\+Map}}}]{m }\end{DoxyParamCaption})}
+
+
+
+initialiser le Minimap 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & Le minimap \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{MiniMap_8c_aa4d0b27b22f7b2a9f9bb40702e37b101}\label{MiniMap_8c_aa4d0b27b22f7b2a9f9bb40702e37b101}} 
+\index{MiniMap.c@{MiniMap.c}!Liberer@{Liberer}}
+\index{Liberer@{Liberer}!MiniMap.c@{MiniMap.c}}
+\doxysubsubsection{\texorpdfstring{Liberer()}{Liberer()}}
+{\footnotesize\ttfamily void Liberer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMiniMap}{Mini\+Map}} $\ast$}]{m }\end{DoxyParamCaption})}
+
+
+
+Liberation du minimap de la memoire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$m} & le pointeur sur le minimap a liberer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{MiniMap_8c_affa9a098a9f3d1784d4ccf624cedc196}\label{MiniMap_8c_affa9a098a9f3d1784d4ccf624cedc196}} 
+\index{MiniMap.c@{MiniMap.c}!MAJMinimap@{MAJMinimap}}
+\index{MAJMinimap@{MAJMinimap}!MiniMap.c@{MiniMap.c}}
+\doxysubsubsection{\texorpdfstring{MAJMinimap()}{MAJMinimap()}}
+{\footnotesize\ttfamily void M\+A\+J\+Minimap (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Rect}]{pos\+Joueur,  }\item[{\mbox{\hyperlink{structMiniMap}{Mini\+Map}} $\ast$}]{m,  }\item[{int}]{redimensionnement }\end{DoxyParamCaption})}
+
+
+
+Redimentionner le Minimap. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos\+Joueur} & Position du joueur sur minimap \\
+\hline
+{\em $\ast$m} & Pointeur sur minimap \\
+\hline
+{\em redimentionnement} & redimentionnement map et personnage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{MiniMap_8c_a6ec5fb1a45b43978d2438878ad3e6327}\label{MiniMap_8c_a6ec5fb1a45b43978d2438878ad3e6327}} 
+\index{MiniMap.c@{MiniMap.c}!meilleur@{meilleur}}
+\index{meilleur@{meilleur}!MiniMap.c@{MiniMap.c}}
+\doxysubsubsection{\texorpdfstring{meilleur()}{meilleur()}}
+{\footnotesize\ttfamily void meilleur (\begin{DoxyParamCaption}\item[{char}]{nomfichier\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{score,  }\item[{char}]{nomjoueur\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Meilleur score. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em score} & le meuilleur Score \\
+\hline
+{\em nomjoueur\mbox{[}$\,$\mbox{]}} & le nom du Joueur qui a le meilleur score \\
+\hline
+{\em nomjoueur\mbox{[}$\,$\mbox{]}} & le nom du Fichier ou on va sauvegarder le score \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{MiniMap_8c_a0bfe42309171a25c7b6c76b2b9c0d08d}\label{MiniMap_8c_a0bfe42309171a25c7b6c76b2b9c0d08d}} 
+\index{MiniMap.c@{MiniMap.c}!sauvegarder@{sauvegarder}}
+\index{sauvegarder@{sauvegarder}!MiniMap.c@{MiniMap.c}}
+\doxysubsubsection{\texorpdfstring{sauvegarder()}{sauvegarder()}}
+{\footnotesize\ttfamily void sauvegarder (\begin{DoxyParamCaption}\item[{int}]{score,  }\item[{char}]{nomjoueur\mbox{[}$\,$\mbox{]},  }\item[{char}]{nomfichier\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+sauvegardage du score du Joueur 
+
+
+\begin{DoxyParams}{Parameters}
+{\em score} & le Score a sauvegarder \\
+\hline
+{\em nomjoueur\mbox{[}$\,$\mbox{]}} & le nom du Joueur a sauvegarder \\
+\hline
+{\em nomjoueur\mbox{[}$\,$\mbox{]}} & le nom du Fichier ou on va sauvegarder le score \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}

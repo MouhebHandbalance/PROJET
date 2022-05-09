@@ -1,0 +1,44 @@
+\hypertarget{headers_8h}{}\doxysection{headers.\+h File Reference}
+\label{headers_8h}\index{headers.h@{headers.h}}
+
+
+Fonctions necessaires Pour l\textquotesingle{}execution du Jeu.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+mixer.\+h$>$}\newline
+Include dependency graph for headers.\+h\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{headers_8h_a9b6bc9242882d1e758e06ed751a2e8ec}\label{headers_8h_a9b6bc9242882d1e758e06ed751a2e8ec}} 
+\#define {\bfseries S\+C\+R\+E\+E\+N\+\_\+W}~800
+\item 
+\mbox{\Hypertarget{headers_8h_a27cddfd509d28b4b2b0b44c093fac090}\label{headers_8h_a27cddfd509d28b4b2b0b44c093fac090}} 
+\#define {\bfseries S\+C\+R\+E\+E\+N\+\_\+H}~800
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{headers_8h_a77f418424653f90da42ba36194b57679}\label{headers_8h_a77f418424653f90da42ba36194b57679}} 
+void {\bfseries Menu\+Principal} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fonctions necessaires Pour l\textquotesingle{}execution du Jeu. 
+
+\begin{DoxyAuthor}{Author}
+Mouheb 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+Apr 19, 2022 
+\end{DoxyDate}
